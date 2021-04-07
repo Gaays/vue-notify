@@ -1,6 +1,9 @@
 # vue-notify
 
+> vue 通知框组件
+
 ## Project setup
+
 ```
 npm install
 ```
@@ -11,6 +14,7 @@ npm run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
