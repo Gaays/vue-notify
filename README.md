@@ -2,27 +2,10 @@
 
 > vue 通知框组件
 
-## Project setup
+基本代码已完成
 
-```
-npm install
-```
+todo：
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [ ] 显示位置功能（左上、左下、右上、右下及偏移）
+- [ ] 显示顺序功能（正序、倒叙）
+- [ ] 颜色模板

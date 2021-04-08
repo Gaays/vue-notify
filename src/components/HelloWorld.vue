@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <vueNotify></vueNotify>
+    <button @click="showMessage">发消息</button>
   </div>
 </template>
 
@@ -9,6 +9,18 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+
+  mounted() {
+    this.$notifyInit();
+    // setInterval(() => {
+    //   this.$notifyMessage();
+    // }, 1000);
+  },
+  methods: {
+    showMessage() {
+      this.$notifyMessage();
+    },
   },
 };
 </script>
