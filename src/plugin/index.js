@@ -1,22 +1,27 @@
 import vue from 'vue'
 import notify from './notify.vue'
 import $ from 'jquery'
+import * as method from './function'
 let vueNotify = {}
 const notifyComponent = vue.extend(notify);
+let position = ''
+let order = ''
 vueNotify.install = function (Vue) {
-    Vue.prototype.$msg = 'Hello I am test.js'
     /**
      * @description  初始化，创建组件div
      * @param        {Object} options 自定义信息
     */
     Vue.prototype.$notifyInit = function (options = {}) {
-        let params = {
-            top: options.top || '50px',
-            right: options.right || '5px'
-        }
+        // 全局存储提示框方位信息
+        position = options.position || 'right-top'
+        order = options.order || 'asc'
+        // 获取提示框方位样式
+        let notifyBoxStyle = method.getNotifyBoxStyle(options)
+
+
         let notifyWrap = document.createElement('div');
         notifyWrap.className = "notify-wrap"
-        notifyWrap.style = `position: fixed; right: ${params.right}; top: ${params.top}; transition-duration: .5s;z-index:2000;overflow:auto;overflow-x:hidden;`
+        notifyWrap.style = `position: fixed; transition-duration: .5s;overflow:auto;overflow-x:hidden; ${notifyBoxStyle}`
         let notifyWrapContent = document.createElement('div');
         notifyWrapContent.className = "notify-wrap-content"
         document.body.appendChild(notifyWrap);
@@ -38,8 +43,8 @@ vueNotify.install = function (Vue) {
                     notifyFlag: true, // 是否显示
                     time: time,//取消按钮是否显示
                     message: { // 文本内容
-                        title: '这是标题',
-                        content: '这是内容'
+                        title: '',
+                        content: ''
                     },
                     type: type, // 类型
                     timer: '',
@@ -73,8 +78,10 @@ vueNotify.install = function (Vue) {
 
         //往notifyWrap里面添加通知
         // 防止通知动画被父级div遮挡
+        // TODO:根据显示位置，处理padding方向
         $('.notify-wrap').css('padding-left', '30px')
-        // 添加通知
+        // 添加通知 
+        // TODO:根据显示位置，处理新旧数据显示顺序;使用function的形式
         $('.notify-wrap-content').prepend(notifyDom.$el)
         setTimeout(() => {
             $('.notify-wrap').css('padding-left', '0')

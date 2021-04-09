@@ -90,24 +90,24 @@ export default {
 </style>
 <style lang="scss">
 /* //此设置存在浏览器兼容性问题，只在chrome浏览器中 起作用 */
-.notify-wrap::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
-  border-radius: 4px;
-  background-color: transparent;
-  z-index: 2111;
-}
-.notify-wrap::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  background-color: transparent;
-  z-index: 2111;
-}
-.notify-wrap::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
-  background-color: rgba(24, 144, 255, 0.2);
-  z-index: 2111;
-}
+// .notify-wrap::-webkit-scrollbar-track {
+//   -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
+//   border-radius: 4px;
+//   background-color: transparent;
+//   z-index: 2111;
+// }
+// .notify-wrap::-webkit-scrollbar {
+//   width: 8px;
+//   height: 8px;
+//   background-color: transparent;
+//   z-index: 2111;
+// }
+// .notify-wrap::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
+//   background-color: rgba(24, 144, 255, 0.2);
+//   z-index: 2111;
+// }
 </style>
 <style scoped>
 .slide-fade-leave-active {
@@ -127,15 +127,11 @@ export default {
 }
 .notify {
   position: relative;
-  /* right: 0px; */
-  padding: 15px 15px 15px 15px;
-  /* width: 320px; */
-  /* height: 70px; */
+  padding: 15px;
   border-radius: 4px;
-  background-color: #0a1845;
-  box-shadow: rgba(56, 151, 231, 0.6) 0px 0px 10px inset;
+  background-color: #fff;
   color: #fff;
-  /* box-shadow: -5px 5px 12px 0 rgba(204, 204, 204, 0.8); */
+  box-shadow: 2px 3px 6px 1px rgba(204, 204, 204, 0.8);
   animation: show cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.4s;
 }
 
@@ -161,8 +157,9 @@ export default {
   justify-content: space-between;
 }
 .notify .title span {
-  font-size: 15px !important;
+  font-size: 15px;
   font-weight: 600;
+  color: #000;
 }
 i {
   /* line-height: 30px; */
@@ -172,6 +169,7 @@ i {
   width: 320px;
   /* height: 30px; */
   font-size: 14px;
+  color: #000;
   /* color: #87cff8; */
 }
 @keyframes show {
