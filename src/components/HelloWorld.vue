@@ -27,13 +27,25 @@ export default {
         position: "right-top",
         offsetX: 5,
         offsetY: 20,
-        zIndex: -12,
         order: "desc",
       };
       this.$notifyInit(options);
     },
     showMessage() {
-      this.$notifyMessage({ title: this.index++, content: "123" });
+      // console.log(this.index % 2 != 0);
+      // if (this.index % 2 != 0) {
+      let notifyInstance = this.$notifyMessage({
+        title: "this.index++",
+        content: "测试阿斯顿发生",
+        time: 0,
+        showCloseIcon: true,
+        type: "error",
+        // time: 30000,
+      });
+      // notifyInstance.close();
+      // } else {
+      //   this.$notifyMessage({ title: this.index++, content: "123", time: 3000 });
+      // }
     },
   },
 };

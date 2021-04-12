@@ -1,13 +1,35 @@
 <template>
   <transition name="slide-fade">
-    <!-- <div class="notifyItem" v-if="timeFlag !== true"> -->
-    <div class="notifyItem">
-      <div class="notify">
-        <div class="title">
-          <span>{{ message.title }}</span>
-          <!-- <i class="el-icon-close"></i> -->
+    <div class="notifyItem" v-if="notifyFlag">
+      <!-- <div class="notifyItem"> -->
+      <div
+        :class="[
+          'notify',
+          position.split('-')[0] === 'right'
+            ? 'notifyRightShow'
+            : 'notifyLeftShow',
+        ]"
+      >
+        <i
+          :class="['fa', 'iconStyle', typeClass, type]"
+          aria-hidden="true"
+          v-if="type !== ''"
+        ></i>
+        <i
+          class="fa fa-times closeIcon"
+          aria-hidden="true"
+          @click="close"
+          v-if="showCloseIcon"
+        ></i>
+        <div class="notifyBody">
+          <div class="title">
+            <span>{{ message.title }}</span>
+            <!-- <i class="el-icon-close"></i> -->
+          </div>
+          <div class="content">
+            <span>{{ message.content }}</span>
+          </div>
         </div>
-        <div class="content">{{ message.content }}</div>
       </div>
     </div>
   </transition>
@@ -22,6 +44,15 @@ export default {
     // this.$nextTick(() => {
     //   this.notify();
     // });
+    if (this.type === "normal") {
+      this.typeClass = "fa-info-circle";
+    } else if (this.type === "success") {
+      this.typeClass = "fa-check-circle";
+    } else if (this.type === "warning") {
+      this.typeClass = "fa-exclamation-circle";
+    } else if (this.type === "error") {
+      this.typeClass = "fa-times-circle";
+    }
   },
   watch: {
     // notifyFlag() {
@@ -70,21 +101,112 @@ export default {
       }
       return className;
     },
+    close() {
+      if (typeof this.timer === "number") {
+        window.clearTimeout(this.timer);
+      }
+      this.notifyFlag = false;
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
-.notify .content {
-  width: 320px;
-  /* height: 30px; */
-  font-size: 15px;
-  p {
-    margin: 0;
-    line-height: 21px;
-    // height: 21px;
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.notifyLeftShow {
+  animation: leftShow cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.4s;
+}
+.notifyRightShow {
+  animation: rightShow cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.4s;
+}
+@keyframes rightShow {
+  0% {
+    right: -350px;
   }
-  .colorClass {
-    color: #2490fc;
+  100% {
+    right: 0px;
+  }
+}
+@keyframes leftShow {
+  0% {
+    left: -350px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+.notifyItem {
+  margin: 10px;
+  width: 350px;
+  display: flex;
+  justify-content: right;
+  /* position: absolute */
+  .notify {
+    position: relative;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #fff;
+    box-shadow: 2px 3px 6px 1px rgba(204, 204, 204, 0.8);
+    width: 320px;
+    display: flex;
+    .iconStyle {
+      margin-right: 15px;
+      font-size: 25px;
+    }
+    .closeIcon {
+      position: absolute;
+      right: 15px;
+      font-size: 14px;
+      line-height: 25px;
+      &::before {
+        cursor: pointer;
+        color: rgb(104, 103, 103);
+      }
+      &:hover {
+        &::before {
+          color: rgb(139, 139, 139);
+        }
+      }
+    }
+    .notifyBody {
+      .title {
+        height: 25px;
+        color: #000;
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+      .content {
+        color: #606266;
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .normal {
+      color: rgb(141, 138, 138);
+    }
+    .success {
+      color: rgb(52, 209, 99);
+    }
+    .warning {
+      color: rgb(245, 211, 16);
+    }
+    .error {
+      color: rgb(221, 42, 42);
+    }
   }
 }
 </style>
@@ -108,76 +230,4 @@ export default {
 //   background-color: rgba(24, 144, 255, 0.2);
 //   z-index: 2111;
 // }
-</style>
-<style scoped>
-.slide-fade-leave-active {
-  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-.notifyItem {
-  margin: 10px;
-  width: 350px;
-  display: flex;
-  justify-content: right;
-  /* position: absolute */
-}
-.notify {
-  position: relative;
-  padding: 15px;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #fff;
-  box-shadow: 2px 3px 6px 1px rgba(204, 204, 204, 0.8);
-  animation: show cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.4s;
-}
-
-.immediate {
-  color: #fe605d;
-}
-.urgency {
-  color: #fdbd41;
-}
-.high {
-  color: #9275ec;
-}
-.medium {
-  color: #2490fc;
-}
-.low {
-  color: #34c94b;
-}
-
-.notify .title {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-.notify .title span {
-  font-size: 15px;
-  font-weight: 600;
-  color: #000;
-}
-i {
-  /* line-height: 30px; */
-  font-size: 17px;
-}
-.notify .content {
-  width: 320px;
-  /* height: 30px; */
-  font-size: 14px;
-  color: #000;
-  /* color: #87cff8; */
-}
-@keyframes show {
-  0% {
-    right: -350px;
-  }
-  100% {
-    right: 0px;
-  }
-}
 </style>
