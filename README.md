@@ -75,6 +75,9 @@ this.$notifyMessage(options)
 - [x] 手动关闭实例方法
 - [x] 默认颜色模板
 - [ ] 提示框关闭回调函数
+- [ ] 自定义提示icon
+- [ ] 自定义关闭icon
+- [ ] title、content支持插槽
 
 ## 依赖：
 
