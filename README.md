@@ -41,6 +41,7 @@ this.$notifyInit(options)
 | order    | 显示顺序，默认时间升序 | asc       | String  | asc\|desc                                      |
 | zIndex   | 显示层级               | 2000      | Number  | -                                              |
 | closable | 是否显示关闭按钮       | false     | Boolean | true\|false                                    |
+| onClose  | 消息框关闭回调函数     | -         | Object  | -                                              |
 
 ### 2. 使用通知框
 
@@ -68,16 +69,6 @@ this.$notifyMessage(options)
 
 
 
-## TODO：
-
-- [x] 显示位置功能（左上、左下、右上、右下及偏移）
-- [x] 显示顺序功能（正序、倒叙）
-- [x] 手动关闭实例方法
-- [x] 默认颜色模板
-- [ ] 提示框关闭回调函数
-- [ ] 自定义提示icon
-- [ ] 自定义关闭icon
-- [ ] title、content支持插槽
 
 ## 依赖：
 

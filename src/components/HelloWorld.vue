@@ -2,6 +2,7 @@
   <div class="hello">
     <button @click="init">初始化</button>
     <button @click="showMessage">发消息</button>
+    <button @click="showHTMLMessage">发html消息</button>
   </div>
 </template>
 
@@ -17,9 +18,7 @@ export default {
     };
   },
   mounted() {
-    // setInterval(() => {
-    //   this.$notifyMessage();
-    // }, 1000);
+    this.init();
   },
   methods: {
     init() {
@@ -31,40 +30,47 @@ export default {
       };
       this.$notifyInit(options);
     },
-    showMessage() {
-      // console.log(this.index % 2 != 0);
-      // if (this.index % 2 != 0) {
+    showHTMLMessage() {
       let notifyInstance = this.$notifyMessage({
-        title: "this.index++",
+        title: "Html test",
+        content:
+          "<strong>Html Message</strong><button>123</button>",
+        time: 0,
+        showCloseIcon: true,
+        type: "error",
+        // onClose: this.closeFunc,
+        // time: 30000,
+        useHtml: true,
+      });
+    },
+    clickFunc() {
+      console.log("click");
+    },
+    showMessage() {
+      let notifyInstance = this.$notifyMessage({
+        title: "testTitle",
         content: "测试阿斯顿发生",
         time: 0,
         showCloseIcon: true,
         type: "error",
+        // onClose: this.closeFunc,
         // time: 30000,
       });
-      // notifyInstance.close();
-      // } else {
-      //   this.$notifyMessage({ title: this.index++, content: "123", time: 3000 });
-      // }
+    },
+    closeFunc() {
+      console.log("close");
+      this.$notifyMessage({
+        title: "关闭notify",
+        content: "刚刚关闭了notify",
+        time: 0,
+        showCloseIcon: true,
+        type: "normal",
+        // time: 30000,
+      });
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

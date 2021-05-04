@@ -53,6 +53,7 @@ export function getNotifyBoxStyle(options) {
     Object.keys(style).forEach(item => {
         positionStyle += item + ':' + style[item] + ';'
     })
+    // positionStyle += 'transition: height 4s;'
     console.log(positionStyle);
     return positionStyle
 }
@@ -75,12 +76,15 @@ export function addNotifyItem(options = {}, positon, order) {
                     title: '',
                     content: ''
                 },
+                useHtml: false,
                 positon: '',
                 type: 'normal', // 类型
                 typeClass: 'fa-info-circle',//FA iconClass
                 timer: '',
                 timeFlag: false,
-                showCloseIcon: false
+                showCloseIcon: false,
+
+
             }
         },
         watch: {
@@ -94,9 +98,12 @@ export function addNotifyItem(options = {}, positon, order) {
         created() {
             this.message.title = options.title;
             this.message.content = options.content;
+            this.useHtml = options.useHtml
             this.position = positon
             this.type = options.type
             this.showCloseIcon = options.showCloseIcon
+            this.closeFunc = options.onClose
+            this.icon = options.icon
             // else {
 
             // }

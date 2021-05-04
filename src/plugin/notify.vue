@@ -1,7 +1,6 @@
 <template>
   <transition name="slide-fade">
     <div class="notifyItem" v-if="notifyFlag">
-      <!-- <div class="notifyItem"> -->
       <div
         :class="[
           'notify',
@@ -24,10 +23,10 @@
         <div class="notifyBody">
           <div class="title">
             <span>{{ message.title }}</span>
-            <!-- <i class="el-icon-close"></i> -->
           </div>
           <div class="content">
-            <span>{{ message.content }}</span>
+            <span v-if="useHtml === false">{{ message.content }}</span>
+            <div v-else v-html="message.content"></div>
           </div>
         </div>
       </div>
@@ -102,10 +101,12 @@ export default {
       return className;
     },
     close() {
+      this.elHeight = this.$el.scrollHeight + "px";
       if (typeof this.timer === "number") {
         window.clearTimeout(this.timer);
       }
       this.notifyFlag = false;
+      if (this.closeFunc != "") this.closeFunc();
     },
   },
 };
@@ -119,7 +120,6 @@ export default {
   transform: translateX(20px);
   opacity: 0;
 }
-
 .notifyLeftShow {
   animation: leftShow cubic-bezier(0.18, 0.89, 0.32, 1.28) 0.4s;
 }
@@ -212,22 +212,22 @@ export default {
 </style>
 <style lang="scss">
 /* //此设置存在浏览器兼容性问题，只在chrome浏览器中 起作用 */
-// .notify-wrap::-webkit-scrollbar-track {
-//   -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
-//   border-radius: 4px;
-//   background-color: transparent;
-//   z-index: 2111;
-// }
-// .notify-wrap::-webkit-scrollbar {
-//   width: 8px;
-//   height: 8px;
-//   background-color: transparent;
-//   z-index: 2111;
-// }
-// .notify-wrap::-webkit-scrollbar-thumb {
-//   border-radius: 4px;
-//   -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
-//   background-color: rgba(24, 144, 255, 0.2);
-//   z-index: 2111;
-// }
+.notify-wrap::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
+  border-radius: 4px;
+  background-color: transparent;
+  z-index: 2111;
+}
+.notify-wrap::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+  z-index: 2111;
+}
+.notify-wrap::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 6px rgba(230, 235, 245, 0.3);
+  background-color: rgba(24, 144, 255, 0.2);
+  z-index: 2111;
+}
 </style>
