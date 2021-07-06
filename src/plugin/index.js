@@ -1,6 +1,4 @@
-import vue from 'vue'
 import notify from './notify.vue'
-import $ from 'jquery'
 import * as method from './function'
 let vueNotify = {}
 let position = ''

@@ -1,8 +1,7 @@
-# vue-notify
+# vue-notify-component
 
 > vue 通知框组件
 
-基本代码已完成
 
 
 
@@ -11,13 +10,13 @@
 ### 1. npm安装
 
 ```js
-npm install vue-notify
+npm install vue-notify-component
 ```
 
 ### 2. 在main.js中引入
 
 ```js
-import vueNotify from 'vue-notify'
+import vueNotify from 'vue-notify-component'
 Vue.use(vueNotify)
 ```
 
