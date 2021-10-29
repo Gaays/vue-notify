@@ -16,7 +16,7 @@
           v-if="type !== ''"
         ></span>
         <i
-          class="iconfont icon-close-bold closeIcon"
+          class="close-bold closeIcon"
           aria-hidden="true"
           @click="close"
           v-if="showCloseIcon"
@@ -40,8 +40,13 @@
 <script>
 export default {
   name: 'vue-notify',
-  created() {},
+  created() {
+    // this.$notifyInit();
+  },
   mounted() {
+    // this.$nextTick(() => {
+    //   this.notify();
+    // });
     if (this.type === 'normal') {
       this.typeClass = 'icon-info-circle-fill';
     } else if (this.type === 'success') {
@@ -52,7 +57,13 @@ export default {
       this.typeClass = 'icon-close-circle-fill';
     }
   },
-  watch: {},
+  watch: {
+    // notifyFlag() {
+    //   this.$nextTick(() => {
+    //     this.notify();
+    //   });
+    // },
+  },
   methods: {
     // 处理notify message长度防止挡住页面其他按钮
     notify() {
@@ -100,8 +111,8 @@ export default {
       }
       this.notifyFlag = false;
       if (this.closeFunc != '') this.closeFunc();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

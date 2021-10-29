@@ -10,17 +10,18 @@
             ? 'notifyRightShow'
             : 'notifyLeftShow',
         ]">
-        <span
-          :class="['iconfont','iconStyle', typeClass, type]"
+        <img
+          :class="['fa', 'iconStyle', type]"
           aria-hidden="true"
           v-if="type !== ''"
-        ></span>
-        <i
-          class="iconfont icon-close-bold closeIcon"
+          :src="typeClass"
+        ></img>
+        <img
+          class="fa fa-times closeIcon"
           aria-hidden="true"
           @click="close"
           v-if="showCloseIcon"
-        ></i>
+        ></img>
         <div class="notifyBody">
           <div class="title">
             <span>{{ message.title }}</span>
@@ -43,13 +44,13 @@ export default {
   created() {},
   mounted() {
     if (this.type === 'normal') {
-      this.typeClass = 'icon-info-circle-fill';
+      this.typeClass = require('../assets/normal.png');
     } else if (this.type === 'success') {
-      this.typeClass = 'icon-check-circle-fill';
+      this.typeClass = require('../assets/success.png');
     } else if (this.type === 'warning') {
-      this.typeClass = 'icon-warning-circle-fill';
+      this.typeClass = require('../assets/warning.png');
     } else if (this.type === 'error') {
-      this.typeClass = 'icon-close-circle-fill';
+      this.typeClass = require('../assets/error.png');
     }
   },
   watch: {},
@@ -152,7 +153,8 @@ export default {
     display: flex;
     .iconStyle {
       margin-right: 15px;
-      font-size: 25px;
+      width: 25px;
+      height: 25px;
     }
     .closeIcon {
       position: absolute;

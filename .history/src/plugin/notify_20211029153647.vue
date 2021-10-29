@@ -10,17 +10,19 @@
             ? 'notifyRightShow'
             : 'notifyLeftShow',
         ]">
-        <span
-          :class="['iconfont','iconStyle', typeClass, type]"
+        <img
+          :class="['iconStyle', type]"
           aria-hidden="true"
           v-if="type !== ''"
-        ></span>
-        <i
-          class="iconfont icon-close-bold closeIcon"
+          :src="typeClass"
+        ></img>
+        <img
+          class="closeIcon"
           aria-hidden="true"
           @click="close"
           v-if="showCloseIcon"
-        ></i>
+          src="../assets/close.png"
+        ></img>
         <div class="notifyBody">
           <div class="title">
             <span>{{ message.title }}</span>
@@ -43,13 +45,13 @@ export default {
   created() {},
   mounted() {
     if (this.type === 'normal') {
-      this.typeClass = 'icon-info-circle-fill';
+      this.typeClass = require('../assets/normal.png');
     } else if (this.type === 'success') {
-      this.typeClass = 'icon-check-circle-fill';
+      this.typeClass = require('../assets/success.png');
     } else if (this.type === 'warning') {
-      this.typeClass = 'icon-warning-circle-fill';
+      this.typeClass = require('../assets/warning.png');
     } else if (this.type === 'error') {
-      this.typeClass = 'icon-close-circle-fill';
+      this.typeClass = require('../assets/error.png');
     }
   },
   watch: {},
@@ -152,12 +154,14 @@ export default {
     display: flex;
     .iconStyle {
       margin-right: 15px;
-      font-size: 25px;
+      width: 25px;
+      height: 25px;
     }
     .closeIcon {
       position: absolute;
       right: 15px;
-      font-size: 14px;
+      width: 14px;
+      height: 14px;
       line-height: 25px;
       &::before {
         cursor: pointer;
